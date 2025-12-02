@@ -3,6 +3,7 @@ from models.activity import WorkActivity, StudyActivity, PersonalActivity
 from models.strategies import SortByDateStrategy, SortByPriorityStrategy
 from models.observer import ConsoleNotifier
 from models.agenda import Agenda
+from models.factory import ActivityFactory
 
 app = Flask(__name__)
 
@@ -11,11 +12,22 @@ agenda = Agenda(strategy=SortByDateStrategy())
 notifier = ConsoleNotifier()
 agenda.attach(notifier)
 
+@app.route("/sort/date")
+def sort_by_date():
+    agenda.strategy = SortByDateStrategy()
+    return redirect(url_for("index", sort="date"))
+
+
+@app.route("/sort/priority")
+def sort_by_priority():
+    agenda.strategy = SortByPriorityStrategy()
+    return redirect(url_for("index", sort="priority"))
 
 @app.route("/")
 def index():
+    current_sort = request.args.get("sort", "date")
     tasks = agenda.get_sorted_activities()
-    return render_template("index.html", tasks=tasks)
+    return render_template("index.html", tasks=tasks, current_sort=current_sort)
 
 
 @app.route("/add", methods=["GET", "POST"])
@@ -28,13 +40,9 @@ def add_task():
         activity_type = request.form["activity_type"]
 
         # Criação do objeto correto conforme o tipo
-        if activity_type == "work":
-            activity = WorkActivity(title, description, deadline, priority)
-        elif activity_type == "study":
-            activity = StudyActivity(title, description, deadline, priority)
-        else:
-            activity = PersonalActivity(title, description, deadline, priority)
-
+        activity = ActivityFactory.create_activity(
+        activity_type, title, description, deadline, priority
+        )
         # Adiciona à agenda
         agenda.add_activity(activity)
 
@@ -45,3 +53,4 @@ def add_task():
 
 if __name__ == "__main__":
     app.run(debug=True)
+

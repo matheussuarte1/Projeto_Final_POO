@@ -5,26 +5,53 @@ body {
     background-color: #f5f5f5;
 }
 
+/* --- HEADER COM BACKGROUND --- */
 header {
-    background-color: #333;
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), /* deixa o texto visível */
+        url("../img/study-background-csdn2xd7eo43wtho.jpg"); /* coloque o caminho da imagem aqui */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
     color: white;
-    padding: 15px;
+    padding: 25px 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
+/* --- MENU --- */
 nav a {
     color: white;
     margin-right: 15px;
     text-decoration: none;
+    font-size: 18px;
+    padding: 6px 10px;
+    border-radius: 5px;
+    transition: 0.3s ease;
 }
 
+/* --- HOVER DO MENU --- */
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(3px);
+    transform: translateY(-2px);
+}
+
+/* --- ÁREA PRINCIPAL --- */
 main {
     padding: 20px;
 }
 
+/* --- TABELAS --- */
 table {
     width: 100%;
     background: white;
     border-collapse: collapse;
+    border-radius: 6px;
+    overflow: hidden;
 }
 
 table th, table td {
@@ -32,14 +59,122 @@ table th, table td {
     border: 1px solid #ccc;
 }
 
+/* --- FORMULÁRIOS --- */
 form {
     background: white;
     padding: 20px;
     width: 300px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 input, button {
     width: 100%;
     padding: 8px;
     margin-top: 10px;
+    border-radius: 5px;
+}
+/* --- FORM DE CADASTRO DE TAREFAS (ESTILO TELA DE LOGIN) --- */
+.task-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 30px;
+    background: #F5F5F5;
+}
+
+/* caixa do formulário */
+.task-form {
+    background: rgb(255, 255, 255);
+    padding-right: 40px;
+    width: 350px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+/* animação suave */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.task-form h2 {
+    text-align: center;
+    margin-top: 0;
+    color: #1e3c72;
+    font-size: 22px;
+}
+
+/* labels */
+.task-form label {
+    font-weight: bold;
+    color: #1e3c72;
+}
+
+/* inputs e select */
+.task-form input,
+.task-form select {
+    margin-top: 2px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.task-form input:focus,
+.task-form select:focus {
+    outline: none;
+    border-color: #2a5298;
+    box-shadow: 0 0 6px rgba(30, 60, 114, 0.3);
+}
+
+/* botão */
+.task-form button {
+    padding: 12px;
+    background: #1e3c72;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.task-form button:hover {
+    background: #16325a;
+}
+
+.sort-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.sort-button {
+    padding: 6px 14px;
+    font-size: 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    border: 1px solid #d0d0d0;
+    background-color: white;   /* cor desativada */
+    color: #333;
+    transition: 0.3s;
+}
+
+/* Hover */
+.sort-button:hover {
+    background-color: #e8f1ff; /* azul suave no hover */
+    color: #0057c2;
+}
+
+/* botão "ativo" após clique */
+.sort-button.active {
+    background-color: #d9e8ff;  /* azul suave */
+    color: #0048a0;
+    border-color: #a7c4ff;
 }

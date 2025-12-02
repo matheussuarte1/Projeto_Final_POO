@@ -1,22 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
 <h2>Atividades</h2>
-
+<div class="sort-buttons">
+    <a href="/sort/date" class="sort-button">Ordenar por Data</a>
+    <a href="/sort/priority" class="sort-button">Ordenar por Prioridade</a>
+</div>
+</div>
 {% if tasks %}
 <table>
     <thead>
         <tr>
-            <th>Descrição</th>
+            <th>Titulo</th>
             <th>Importância</th>
             <th>Data</th>
         </tr>
     </thead>
     <tbody>
         {% for task in tasks %}
-        <tr>
-            <td>{{ task.description }}</td>
-            <td>{{ task.importance }}</td>
-            <td>{{ task.due_date }}</td>
+         <tr>
+            <td>{{ task.title }}</td>
+            <td>{{ task.priority }}</td>
+            <td>{{ task.deadline.strftime("%d/%m/%Y") }}</td>
         </tr>
         {% endfor %}
     </tbody>
