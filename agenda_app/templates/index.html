@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Atividades</h2>
+
+{% if tasks %}
+<table>
+    <thead>
+        <tr>
+            <th>Descrição</th>
+            <th>Importância</th>
+            <th>Data</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task.description }}</td>
+            <td>{{ task.importance }}</td>
+            <td>{{ task.due_date }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>Nenhuma atividade cadastrada ainda.</p>
+{% endif %}
+
+{% endblock %}
